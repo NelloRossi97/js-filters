@@ -1,0 +1,19 @@
+body {
+    background: #3b4350;
+    color: white;
+}
+
+.image-container{
+    width: 500px;
+    border: 3px solid white;
+    position: relative;
+}
+.image-container img {
+    max-width: 100%;
+    max-height: 100%;
+    display: none;
+}
+
+p{
+    width: 120px;
+}
