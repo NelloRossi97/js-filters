@@ -13,6 +13,9 @@ body {
     max-height: 100%;
     display: none;
 }
+.image-container button{
+    display: none;
+}
 
 p{
     width: 120px;
