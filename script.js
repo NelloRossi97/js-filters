@@ -1,34 +1,56 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const imageInput = document.getElementById('imageInput');
-    const previewImage = document.getElementById('previewImage');
-    const changeImage = document.getElementById('changeImage');
+const imageInput = document.getElementById('imageInput');
+const previewImage = document.getElementById('previewImage');
+const changeImage = document.getElementById('changeImage');
 
-    imageInput.addEventListener('change', function(event) {
-        const file = event.target.files[0];
+imageInput.addEventListener('change', function(event) {
+    const file = event.target.files[0];
 
-        if (file) {
-            const reader = new FileReader();
+    if (file) {
+        const reader = new FileReader();
 
-            reader.addEventListener('load', function() {
-                previewImage.src = reader.result;
-                previewImage.style.display = 'block';
-                imageInput.style.display = 'none';
-                changeImage.style.display = 'block';
-            });
+        reader.addEventListener('load', function() {
+            previewImage.src = reader.result;
+            previewImage.style.display = 'block';
+            imageInput.style.display = 'none';
+            changeImage.style.display = 'block';
+        });
 
-            changeImage.addEventListener('click', function () {
-                previewImage.style.display = 'none';
-                imageInput.style.display = 'block';
-                changeImage.style.display = 'none';
-            });
+        changeImage.addEventListener('click', function () {
+            previewImage.style.display = 'none';
+            imageInput.style.display = 'block';
+            changeImage.style.display = 'none';
+        });
 
-            reader.readAsDataURL(file);
-        }
-    });
-    
-    const filters = document.querySelectorAll('.title');
+        reader.readAsDataURL(file);
+    }
+    event.target.value = '';
 });
 
-function showRange(filters) {
-    
+const filters = document.querySelectorAll('.btn-outline-light');
+const inputRange = document.querySelectorAll('input[type=range]');
+
+
+filters.forEach(filter => {
+    filter.addEventListener('click', showRange)
+})
+
+function showRange() {
+    previewImage.style.filter = 'null';
+    inputRange.forEach(input => {
+        input.classList.remove('d-block');
+    });
+    this.nextElementSibling.classList.add('d-block');
+    const inputActive = document.querySelector('.d-block');
+    const filterName = this.textContent.toLowerCase();
+    inputActive.addEventListener('change', function () {
+        applyFilter(inputActive, filterName)
+    });
+}
+
+
+
+function applyFilter(input, filter) {
+    if (previewImage) {
+        previewImage.style.filter = `${filter}(${input.value})`;
+    }
 }

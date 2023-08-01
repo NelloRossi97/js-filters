@@ -21,3 +21,6 @@ body {
 p{
     width: 120px;
 }
+input[type=range]{
+    display: none;
+}
