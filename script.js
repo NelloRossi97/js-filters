@@ -35,7 +35,7 @@ filters.forEach(filter => {
 })
 
 function showRange() {
-    previewImage.style.filter = 'null';
+    previewImage.style.filter = 'none';
     inputRange.forEach(input => {
         input.classList.remove('d-block');
     });
@@ -51,6 +51,12 @@ function showRange() {
 
 function applyFilter(input, filter) {
     if (previewImage) {
-        previewImage.style.filter = `${filter}(${input.value})`;
+        if (filter === 'blur') {
+            previewImage.style.filter = `${filter}(${input.value}px)`;
+        } else if (filter === 'hue-rotate') {
+            previewImage.style.filter = `${filter}(${input.value}deg)`;
+        } else {
+            previewImage.style.filter = `${filter}(${input.value})`;
+        }
     }
 }
